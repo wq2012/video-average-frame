@@ -13,6 +13,7 @@ def parse_args():
 
     parser.add_argument(
         '--output_image',
+        default='',
         type=str,
         help='Path to the output averaged frame.')
 
@@ -47,7 +48,11 @@ def main():
 
     average_frame /= num_frames
     average_frame = average_frame.astype('uint8')
-    cv2.imwrite(args.output_image, average_frame)
+    if not args.output_image:
+        output_image = args.video + '.jpg'
+    else:
+        output_image = args.output_image
+    cv2.imwrite(output_image, average_frame)
 
     cap.release()
     print('Average frame image saved to {}, {} frames used.'.format(
