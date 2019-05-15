@@ -25,9 +25,13 @@ pip3 install opencv-python
 You can use it like this:
 
 ```bash
-python3 average.py --video=example.mp4 --output_image=average_frame.jpg --max_frames=5000
+python3 process.py --video=example.mp4 --output_image=average_frame.jpg --max_frames=5000
 ```
 
 Then you will be generating an image like the following from this [example video](example.mp4):
 
 ![average_frame.jpg](average_frame.jpg)
+
+You can also use the max frame instead of the average frame with `--mode=max`, and you will be generating an image like this one:
+
+![max_frame.jpg](max_frame.jpg)
