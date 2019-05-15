@@ -1,4 +1,4 @@
-# Video Average Frame
+# Video Average Frame [![Build Status](https://travis-ci.org/wq2012/video-average-frame.svg?branch=master)](https://travis-ci.org/wq2012/video-average-frame)
 
 ## Summary
 
