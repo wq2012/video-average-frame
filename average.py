@@ -56,7 +56,7 @@ def main():
 
     cap.release()
     print('Average frame image saved to {}, {} frames used.'.format(
-        args.output_image, num_frames))
+        output_image, num_frames))
 
 
 if __name__ == '__main__':
