@@ -4,19 +4,32 @@ import numpy as np
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Arguments for the video frame averaging tool.")
+    parser = argparse.ArgumentParser(
+        description="Arguments for the video frame averaging tool."
+    )
 
     parser.add_argument("--video", type=str, help="Path to the source video.")
 
-    parser.add_argument("--output_image", default="", type=str, help="Path to the output averaged frame.")
+    parser.add_argument(
+        "--output_image",
+        default="",
+        type=str,
+        help="Path to the output averaged frame.",
+    )
 
-    parser.add_argument("--max_frames", default=1000000, type=int, help="Max number of frames to use.")
+    parser.add_argument(
+        "--max_frames",
+        default=1000000,
+        type=int,
+        help="Max number of frames to use.",
+    )
 
     parser.add_argument(
         "--mode",
         default="average",
         type=str,
-        help="How to generate output image. Currently it can be " "`average` or `max` or `median`",
+        help="How to generate output image. Currently it can be "
+        "`average` or `max` or `median`",
     )
 
     return parser.parse_args()
@@ -44,14 +57,20 @@ def main():
             if median_frame is None:
                 median_frame = np.array([frame])
             else:
-                median_frame = np.append(median_frame, np.array([frame]), axis=0)
+                median_frame = np.append(
+                    median_frame, np.array([frame]), axis=0
+                )
                 if num_frames % 50 == 0:
                     if median_median_frame is None:
-                        median_median_frame = np.array([np.median(median_frame, axis=0)])
+                        median_median_frame = np.array(
+                            [np.median(median_frame, axis=0)]
+                        )
                         median_frame = None
                     else:
                         median_median_frame = np.append(
-                            median_median_frame, np.array([np.median(median_frame, axis=0)]), axis=0
+                            median_median_frame,
+                            np.array([np.median(median_frame, axis=0)]),
+                            axis=0,
                         )
                         median_frame = None
         else:
@@ -77,11 +96,19 @@ def main():
         cv2.imwrite(output_image, max_frame)
     else:
         if num_frames % 50 > 25:
-            median_median_frame = np.append(median_median_frame, np.array([np.median(median_frame, axis=0)]), axis=0)
+            median_median_frame = np.append(
+                median_median_frame,
+                np.array([np.median(median_frame, axis=0)]),
+                axis=0,
+            )
         cv2.imwrite(output_image, np.median(median_median_frame, axis=0))
 
     cap.release()
-    print("Output image saved to {}, {} frames used.".format(output_image, num_frames))
+    print(
+        "Output image saved to {}, {} frames used.".format(
+            output_image, num_frames
+        )
+    )
 
 
 if __name__ == "__main__":

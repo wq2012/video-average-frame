@@ -45,4 +45,4 @@ Median uses the most typical value of the given pixel, providing a sharper image
 
 Zoomed in images, average on the left, median on the right:
 
-![average_vs_median](https://user-images.githubusercontent.com/66311383/119493938-077c5c00-bd61-11eb-9b9c-e73cea294f88.jpg)
+![average_vs_median](average_vs_median.jpg)
