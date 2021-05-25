@@ -40,43 +40,44 @@ def main():
         _, frame = cap.read()
         if frame is None:
             break
-        if average_frame is None:
-            average_frame = frame.astype(float)
-            max_frame = frame
-            median_frame = np.array([frame])
-        else:
-            average_frame += frame.astype(float)
-            max_frame = np.maximum(frame, max_frame)
+        if args.mode == "median":
             if median_frame is None:
                 median_frame = np.array([frame])
             else:
                 median_frame = np.append(median_frame, np.array([frame]), axis=0)
-            if num_frames % 50 == 0:
-                if median_median_frame is None:
-                    median_median_frame = np.array([np.median(median_frame, axis=0)])
-                    median_frame = None
-                else:
-                    median_median_frame = np.append(
-                        median_median_frame, np.array([np.median(median_frame, axis=0)]), axis=0
-                    )
-                    median_frame = None
+                if num_frames % 50 == 0:
+                    if median_median_frame is None:
+                        median_median_frame = np.array([np.median(median_frame, axis=0)])
+                        median_frame = None
+                    else:
+                        median_median_frame = np.append(
+                            median_median_frame, np.array([np.median(median_frame, axis=0)]), axis=0
+                        )
+                        median_frame = None
+        else:
+            if average_frame is None:
+                average_frame = frame.astype(float)
+                max_frame = frame
+            else:
+                average_frame += frame.astype(float)
+                max_frame = np.maximum(frame, max_frame)
         num_frames += 1
         if num_frames >= args.max_frames:
             break
-    if num_frames % 50 > 25:
-        median_median_frame = np.append(median_median_frame, np.array([np.median(median_frame, axis=0)]), axis=0)
 
-    average_frame /= num_frames
-    average_frame = average_frame.astype("uint8")
     if not args.output_image:
         output_image = args.video + ".jpg"
     else:
         output_image = args.output_image
     if args.mode == "average":
+        average_frame /= num_frames
+        average_frame = average_frame.astype("uint8")
         cv2.imwrite(output_image, average_frame)
     elif args.mode == "max":
         cv2.imwrite(output_image, max_frame)
     else:
+        if num_frames % 50 > 25:
+            median_median_frame = np.append(median_median_frame, np.array([np.median(median_frame, axis=0)]), axis=0)
         cv2.imwrite(output_image, np.median(median_median_frame, axis=0))
 
     cap.release()
