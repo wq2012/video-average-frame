@@ -35,3 +35,7 @@ Then you will be generating an image like the following from this [example video
 You can also use the max frame instead of the average frame with `--mode=max`, and you will be generating an image like this one:
 
 ![max_frame.jpg](max_frame.jpg)
+
+For sharper images you can try `--mode=median`:
+
+![median_frame.jpg](median_frame.jpg)
