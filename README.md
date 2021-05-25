@@ -36,6 +36,13 @@ You can also use the max frame instead of the average frame with `--mode=max`, a
 
 ![max_frame.jpg](max_frame.jpg)
 
-For sharper images you can try `--mode=median`:
+The median is a robust measure of central tendency. In average mode every frame is used, resulting in blurry images if something moves quickly in 
+the video stream (e.g. seagull flying, buoy moving in the background).
+
+Median uses the most typical value of the given pixel, providing a sharper image `--mode=median`:
 
 ![median_frame.jpg](median_frame.jpg)
+
+Zoomed in images, average on the left, median on the right:
+
+![average_vs_median](https://user-images.githubusercontent.com/66311383/119493938-077c5c00-bd61-11eb-9b9c-e73cea294f88.jpg)
