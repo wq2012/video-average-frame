@@ -95,7 +95,9 @@ def main():
     elif args.mode == "max":
         cv2.imwrite(output_image, max_frame)
     else:
-        if num_frames % 50 > 25:
+        if median_median_frame is None:
+            median_median_frame = np.array([np.median(median_frame, axis=0)])
+        elif num_frames % 50 > 25:
             median_median_frame = np.append(
                 median_median_frame,
                 np.array([np.median(median_frame, axis=0)]),
