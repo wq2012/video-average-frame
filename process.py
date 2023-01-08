@@ -19,7 +19,6 @@ def parse_args():
 
     parser.add_argument(
         "--max_frames",
-        default=1000000,
         type=int,
         help="Max number of frames to use.",
     )
@@ -29,7 +28,7 @@ def parse_args():
         default="average",
         type=str,
         help="How to generate output image. Currently it can be "
-        "`average` or `max` or `median`",
+        "`average` or `max` or `min` or `median`",
     )
 
     return parser.parse_args()
@@ -38,14 +37,23 @@ def parse_args():
 def main():
     args = parse_args()
 
-    if args.mode not in {"average", "max", "median"}:
+    if not args.video:
+        raise ValueError("Video file path is missing")
+
+    if args.mode not in ["average", "max", "min", "median"]:
         raise ValueError("Unexpected mode {}".format(args.mode))
 
     cap = cv2.VideoCapture(args.video)
 
+    if args.max_frames:
+        max_frames = args.max_frames
+    else:
+        max_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
     num_frames = 0
     average_frame = None
     max_frame = None
+    min_frame = None
     median_frame = None
     median_median_frame = None
 
@@ -77,15 +85,19 @@ def main():
             if average_frame is None:
                 average_frame = frame.astype(float)
                 max_frame = frame
+                min_frame = frame
             else:
                 average_frame += frame.astype(float)
                 max_frame = np.maximum(frame, max_frame)
+                min_frame = np.minimum(frame, min_frame)
         num_frames += 1
-        if num_frames >= args.max_frames:
+        if num_frames == 1 or num_frames % 1000 == 0 or num_frames >= max_frames:
+            print(f"Processed frame {num_frames}/{max_frames}")
+        if num_frames >= max_frames:
             break
 
     if not args.output_image:
-        output_image = args.video + ".jpg"
+        output_image = args.video + "." + args.mode + ".jpg"
     else:
         output_image = args.output_image
     if args.mode == "average":
@@ -94,6 +106,8 @@ def main():
         cv2.imwrite(output_image, average_frame)
     elif args.mode == "max":
         cv2.imwrite(output_image, max_frame)
+    elif args.mode == "min":
+        cv2.imwrite(output_image, min_frame)
     else:
         if median_median_frame is None:
             median_median_frame = np.array([np.median(median_frame, axis=0)])

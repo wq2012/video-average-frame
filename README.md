@@ -2,7 +2,7 @@
 
 ## Summary
 
-This is a Python tool to compute the average frame of a video.
+This is a Python tool to compute the average frame of a video. It also supports computing min, max and median.
 
 ## Motivation
 
