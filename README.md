@@ -28,7 +28,7 @@ You can install the package:
 pip3 install "video-average-frame @ git+https://github.com/wq2012/video-average-frame.git"
 ```
 
-After install the package, you can use the binary tool `video-average-frame`directly from your command line terminal:
+After installing the package, you can run the binary tool `video-average-frame` directly from your command line terminal:
 
 ```
 video-average-frame --video=example.mp4 --output_image=average_frame.jpg --max_frames=5000
