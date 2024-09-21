@@ -1,4 +1,4 @@
-# Video Average Frame [![Build Status](https://travis-ci.org/wq2012/video-average-frame.svg?branch=master)](https://travis-ci.org/wq2012/video-average-frame)
+# Video Average Frame [![Python application](https://github.com/wq2012/video-average-frame/actions/workflows/python-app.yml/badge.svg)](https://github.com/wq2012/video-average-frame/actions/workflows/python-app.yml)
 
 ## Summary
 
@@ -36,7 +36,7 @@ You can also use the max frame instead of the average frame with `--mode=max`, a
 
 ![max_frame.jpg](max_frame.jpg)
 
-The median is a robust measure of central tendency. In average mode every frame is used, resulting in blurry images if something moves quickly in 
+The median is a robust measure of central tendency. In average mode every frame is used, resulting in blurry images if something moves quickly in
 the video stream (e.g. seagull flying, buoy moving in the background).
 
 Median uses the most typical value of the given pixel, providing a sharper image `--mode=median`:

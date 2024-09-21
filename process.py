@@ -91,7 +91,8 @@ def main():
                 max_frame = np.maximum(frame, max_frame)
                 min_frame = np.minimum(frame, min_frame)
         num_frames += 1
-        if num_frames == 1 or num_frames % 1000 == 0 or num_frames >= max_frames:
+        if (num_frames == 1 or num_frames % 1000 == 0
+            or num_frames >= max_frames):
             print(f"Processed frame {num_frames}/{max_frames}")
         if num_frames >= max_frames:
             break
