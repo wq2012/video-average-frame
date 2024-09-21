@@ -1,1 +1,10 @@
+*~
+*.pyc
+build/*
+dist/*
+*.egg-info/*
+.coverage
 .DS_Store
+.pytype
+coverage.xml
+.venv

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "video-average-frame"
+version = "0.0.1"
+dependencies = [
+  "numpy",
+  "opencv-python",
+]
+requires-python = ">= 3.7"
+authors = [
+  {name = "Quan Wang", email = "quanw@google.com"},
+]
+description = "This is a Python tool to compute the average frame of a video. It also supports computing min, max and median."
+readme = "README.md"
+classifiers = [
+  "Programming Language :: Python :: 3",
+]
+
+[project.scripts]
+video-average-frame = "process:main"
