@@ -17,7 +17,21 @@ and use this tool to generate an average frame image.
 This tool requires OpenCV python. Install it by:
 
 ```bash
-pip3 install opencv-python
+pip3 install numpy opencv-python
+```
+
+## Install the package
+
+You can install the package:
+
+```
+pip3 install "video-average-frame @ git+https://github.com/wq2012/video-average-frame.git"
+```
+
+After install the package, you can use the binary tool `video-average-frame`directly from your command line terminal:
+
+```
+video-average-frame --video=example.mp4 --output_image=average_frame.jpg --max_frames=5000
 ```
 
 ## Example Usage
